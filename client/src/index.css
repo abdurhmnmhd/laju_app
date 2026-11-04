@@ -1,0 +1,141 @@
+/* Token desain mengikuti file Figma "Laju". */
+:root {
+  --ink: #171c19;
+  --ink-soft: #2a322d;
+  --muted: #747b75;
+  --lime: #c5f65a;
+  --lime-soft: #eef7df;
+  --dark: #18201b;
+  --border: #e3e6df;
+  --soft: #f5f6f3;
+  --white: #ffffff;
+  --available-ink: #365516;
+  --empty-bg: #edf1e8;
+  --danger: #be3e35;
+  --danger-soft: #fdf3f2;
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
+  --font-sans:
+    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --shadow-sheet: 0 -18px 48px -24px rgba(24, 32, 27, 0.45);
+  --shadow-dialog: 0 24px 64px -28px rgba(24, 32, 27, 0.5);
+
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
+  color: var(--ink);
+  background: var(--white);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--white);
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tombol aksi utama dipakai di formulir pesanan dan halaman tinjauan. */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  border-color: var(--lime);
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.btn--primary:hover {
+  border-color: #b6ea46;
+  background: #b6ea46;
+}
+
+.btn--ghost {
+  border-color: var(--border);
+  background: var(--white);
+  color: var(--ink);
+}
+
+.btn--ghost:hover {
+  background: var(--soft);
+}

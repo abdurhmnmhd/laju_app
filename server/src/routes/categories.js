@@ -36,6 +36,7 @@ router.post('/',authenticateToken, (req,res) => {
     } catch (err){
         res.status(400).json({ success: false, message: err.message});
     }
+});
 
 //PUT Update
 router.put('/:id', authenticateToken, (req, res) => {
@@ -44,20 +45,20 @@ router.put('/:id', authenticateToken, (req, res) => {
 
     if (!name || !name.trim()){
         return res.status(400).json({
-            succes: false,
+            success: false,
             message: "Category name is required",
         });
     }
     try {
-        const updated = db.updatedCategory(id,name.trim());
+        const updated = db.updateCategory(id,name.trim());
         if (!updated){
             return res.status(400).json({
-                succes: false,
+                success: false,
                 message: "category not found",
             });
         }
         res.json({
-            succes: true,
+            success: true,
             data: updated,
             message: "Update category succesful",
         });
@@ -67,29 +68,28 @@ router.put('/:id', authenticateToken, (req, res) => {
             message: err.message,
         })
     }
-})
 });
 
 //Delete
 
-router.delete('/:id', authenticateToken, (re1, res) =>{
+router.delete('/:id', authenticateToken, (req, res) =>{
     const { id } = req.params;
     const products = db.getProducts ({ categoryId: id});
 
-    if (product.length > 0){
+    if (products.length > 0){
         return res.status(400).json({
-            succes: false,
+            success: false,
             message: `Tidak dapat menghapus kategori karena  masih memiliki ${products.length} produk terkait. Hapus atau pindahkan produk terlebih dahulu.`
         });
     }
 
     const deleted = db.deleteCategory(id);
     if (!deleted) {
-        return res.status(404).json({ succes: false, message: 'Kategori tidak ditemukan'});
+        return res.status(404).json({ success: false, message: 'Kategori tidak ditemukan'});
     }
 
     res.json({
-        succes: true,
+        success: true,
         message: 'Kategori berhasil dihapus'
     });
 });

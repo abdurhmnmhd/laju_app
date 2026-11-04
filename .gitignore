@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build and test output
+dist/
+dist-ssr/
+coverage/
+.vite/
+
+# Runtime data and uploaded files
+server/uploads/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.tmp
+*.temp
+
+# Editor and operating-system files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.user
+*.userossc
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Agent instructions
+AGENTS.md
+**/AGENTS.md
+**/agent.md
+**/*.agent.md

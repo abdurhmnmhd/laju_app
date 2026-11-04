@@ -1,0 +1,275 @@
+.site-footer {
+  background: var(--dark);
+  color: var(--white);
+  padding: 40px 20px 22px;
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: 32px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.site-footer__brand {
+  position: relative;
+  min-width: 0;
+}
+
+/* Cahaya lime di belakang blok brand, pengganti blur primary pada referensi. */
+.site-footer__glow {
+  position: absolute;
+  top: -18px;
+  right: -6px;
+  width: 132px;
+  height: 132px;
+  border-radius: 999px;
+  background: rgba(197, 246, 90, 0.16);
+  filter: blur(42px);
+  pointer-events: none;
+}
+
+.site-footer__wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 30px;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.site-footer__mark {
+  width: 10px;
+  height: 8px;
+  flex: 0 0 10px;
+  background: var(--lime);
+  transform: rotate(-15deg);
+}
+
+.site-footer__tagline {
+  margin-top: 10px;
+  max-width: 32ch;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Formulir nomor WhatsApp, pengganti newsletter pada referensi. */
+.site-footer__form {
+  position: relative;
+  max-width: 300px;
+  margin-top: 18px;
+}
+
+.site-footer__input {
+  width: 100%;
+  height: 44px;
+  padding: 0 52px 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  color: var(--white);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.site-footer__input::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.site-footer__input:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.site-footer__input:focus {
+  outline: none;
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(197, 246, 90, 0.16);
+}
+
+.site-footer__submit {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.site-footer__submit:hover {
+  background: #b6ea46;
+  transform: scale(1.05);
+}
+
+.site-footer__submit:active {
+  transform: scale(0.97);
+}
+
+.site-footer__hint,
+.site-footer__error {
+  margin-top: 8px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.site-footer__hint {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.site-footer__error {
+  color: #ffb4a8;
+}
+
+.site-footer__col {
+  min-width: 0;
+}
+
+.site-footer__heading {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.site-footer__links a {
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer__links a:hover {
+  color: var(--lime);
+}
+
+.site-footer__address {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  font-size: 12px;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.site-footer__address p {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.6;
+}
+
+.site-footer__address svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.36);
+}
+
+.site-footer__address a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer__address a:hover {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  background: var(--lime);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.15s ease;
+}
+
+.site-footer__cta:hover {
+  background: #b6ea46;
+}
+
+.site-footer__note {
+  margin-top: 12px;
+  max-width: 30ch;
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.46);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  max-width: 1160px;
+  margin: 32px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.44);
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--lime);
+}
+
+@media (min-width: 640px) {
+  .site-footer {
+    padding: 48px 32px 26px;
+  }
+
+  .site-footer__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 32px;
+  }
+
+  .site-footer__wordmark {
+    font-size: 34px;
+  }
+
+  .site-footer__bottom {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-footer {
+    padding: 56px 32px 28px;
+  }
+
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+    gap: 48px 40px;
+  }
+}

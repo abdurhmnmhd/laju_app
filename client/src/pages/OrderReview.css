@@ -1,0 +1,282 @@
+.review-page {
+  min-height: 100svh;
+  background: var(--white);
+}
+
+.review {
+  padding: 24px 20px 40px;
+}
+
+.review__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.review__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review__stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.review__stage svg {
+  flex: 0 0 auto;
+  color: var(--muted);
+}
+
+.review__stage .is-current {
+  color: var(--ink);
+}
+
+.review__title {
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.review__lead {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Kartu ringkasan produk */
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+}
+
+.review-card__product {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-card__media {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 76px;
+  flex: 0 0 68px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #e7ece5;
+  color: var(--muted);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.review-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-card__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.review-card__name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.review-card__meta {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.review-card__price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.review-card__divider {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--border);
+}
+
+.review-card__subtotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.review-card__subtotal span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.review-card__subtotal strong {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.review-card__note {
+  margin-top: -8px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* Pratinjau pesan WhatsApp */
+.review-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-preview__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.review-preview__head h2 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.review-preview__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.review-preview__copy:hover {
+  background: var(--soft);
+}
+
+.review-preview__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  background: var(--lime-soft);
+}
+
+.review-preview__body p {
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--available-ink);
+  white-space: pre-wrap;
+}
+
+.review-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 10px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.review-info svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.review-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-actions__warning {
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--danger-soft);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--danger);
+}
+
+@media (min-width: 640px) {
+  .review {
+    padding: 40px 32px 64px;
+  }
+
+  .review__inner {
+    gap: 24px;
+    max-width: 640px;
+  }
+
+  .review__stage {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .review__title {
+    font-size: 34px;
+  }
+
+  .review__lead {
+    font-size: 13px;
+  }
+
+  .review-card {
+    padding: 18px;
+  }
+
+  .review-card__media {
+    width: 84px;
+    height: 94px;
+    flex-basis: 84px;
+  }
+
+  .review-card__name {
+    font-size: 16px;
+  }
+
+  .review-card__subtotal strong {
+    font-size: 20px;
+  }
+
+  .review-preview__body p {
+    font-size: 12px;
+  }
+}

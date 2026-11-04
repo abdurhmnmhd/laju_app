@@ -1,0 +1,69 @@
+{
+    "settings": {
+        "storename": "",
+        "tagline": "",
+        "phone": "",
+        "address": "",
+        "currency":"",
+        "activateWhatsapp": true
+    },
+    "admin": {
+        "id": "",
+        "name": "",
+        "email": "",
+        "password": ""
+    },
+
+    "categories": [
+        {
+            "id": "",
+            "name": "",
+            "slug": ""
+        },
+        {
+            "id": "",
+            "name": "",
+            "slug": ""
+        },
+        {
+            "id": "",
+            "name": "",
+            "slug": ""
+        }
+    ],
+    "product": [
+        {
+            "id": "",
+            "name":"",
+            "categoryId": "",
+            "categoryName": "",
+            "price": 28000,
+            "stockStatus": "",
+            "description": "",
+            "image": "",
+            "createdAt": ""
+        },
+        {
+            "id": "",
+            "name":"",
+            "categoryId": "",
+            "categoryName": "",
+            "price": 28000,
+            "stockStatus": "",
+            "description": "",
+            "image": "",
+            "createdAt": ""
+        },
+        {
+            "id": "",
+            "name":"",
+            "categoryId": "",
+            "categoryName": "",
+            "price": 28000,
+            "stockStatus": "",
+            "description": "",
+            "image": "",
+            "createdAt": ""
+        }
+    ]
+}

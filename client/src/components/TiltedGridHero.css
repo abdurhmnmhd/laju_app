@@ -1,0 +1,44 @@
+.tgh {
+  position: relative;
+  overflow: hidden;
+}
+
+.tgh__band {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tgh__band.is-ready {
+  opacity: 1;
+}
+
+.tgh__tile {
+  position: absolute;
+}
+
+.tgh__slice {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  background: var(--soft);
+}
+
+.tgh__slice:first-child {
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+}
+
+.tgh__slice:last-child {
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.tgh__img {
+  position: absolute;
+  top: 0;
+  max-width: none;
+  object-fit: cover;
+}
