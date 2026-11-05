@@ -5,6 +5,16 @@ node_modules/
 .env
 .env.*
 !.env.example
+server/uploads/**/*
+
+# Database files (secrets & runtime data — never commit)
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+server/src/db/*.sqlite
+server/src/db/*.sqlite-shm
+server/src/db/*.sqlite-wal
+data.json
 
 # Build and test output
 dist/

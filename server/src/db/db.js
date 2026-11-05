@@ -82,13 +82,19 @@ class SqliteDatabase {
           insertSetting.run('currency', 'Rp');
         }
     
-        // Seed Admin
+        // Seed Admin — password HANYA dari env (wajib >=8 karakter), tanpa password default
         const existingAdmin = this.db.prepare('SELECT COUNT(*) AS count FROM admins').get();
         if (existingAdmin.count === 0) {
-          const hashedPassword = bcrypt.hashSync('admin123', 10);
-          this.db.prepare(
-            'INSERT INTO admins (id, name, email, password) VALUES (?, ?, ?, ?)'
-          ).run('admin-1', 'Owner Laju ', 'admin@katalogwa.com', hashedPassword);
+          const adminEmail = process.env.ADMIN_EMAIL || 'admin@katalogwa.com';
+          const adminPassword = process.env.ADMIN_PASSWORD;
+          if (!adminPassword || adminPassword.length < 8) {
+            console.warn('[db] ADMIN_PASSWORD belum diset / terlalu pendek. Admin tidak dibuat. Set env ADMIN_PASSWORD lalu restart server.');
+          } else {
+            const hashedPassword = bcrypt.hashSync(adminPassword, 10);
+            this.db.prepare(
+              'INSERT INTO admins (id, name, email, password) VALUES (?, ?, ?, ?)'
+            ).run('admin-1', process.env.ADMIN_NAME || 'Owner Laju ', adminEmail, hashedPassword);
+          }
         }
     
         // Seed Categories
