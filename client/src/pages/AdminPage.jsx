@@ -1,7 +1,19 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BRAND, formatPrice } from '../lib/format'
 import { requestJson } from '../lib/api'
+import AdminLogin from './AdminLogin'
 import './AdminPage.css'
+
+const SESSION_KEY = 'laju-admin-session'
+
+function readSession() {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY)
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
 
 const emptyProduct = {
   name: '',
@@ -21,57 +33,6 @@ function authOptions(token, options = {}) {
       Authorization: `Bearer ${token}`,
     },
   }
-}
-
-function Login({ onLogin }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const submit = async (event) => {
-    event.preventDefault()
-    setError('')
-    setLoading(true)
-    try {
-      const payload = await requestJson('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-      onLogin(payload.token, payload.user)
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <main className="admin-login">
-      <div className="admin-login__card">
-        <a className="admin-brand" href="/">{BRAND}<span /></a>
-        <p className="admin-eyebrow">Area admin</p>
-        <h1>Kelola toko dengan mudah.</h1>
-        <p className="admin-muted">Masuk untuk mengatur katalog, stok, dan informasi toko.</p>
-        <form className="admin-form" onSubmit={submit}>
-          <label>
-            Email
-            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-          </label>
-          <label>
-            Password
-            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
-          </label>
-          {error && <p className="admin-alert" role="alert">{error}</p>}
-          <button className="admin-button admin-button--primary" disabled={loading}>
-            {loading ? 'Memeriksa…' : 'Masuk ke dashboard'}
-          </button>
-        </form>
-        <a className="admin-back" href="/">← Kembali ke katalog</a>
-      </div>
-    </main>
-  )
 }
 
 function ProductForm({ product, categories, onSave, onCancel }) {
@@ -295,21 +256,23 @@ function Dashboard({ user, token, onLogout }) {
 }
 
 export default function AdminPage() {
-  const [session, setSession] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('laju-admin-session')) || null } catch { return null }
-  })
+  const [session, setSession] = useState(readSession)
 
-  const login = (token, user) => {
+  const login = (token, user, remember = true) => {
     const next = { token, user }
-    localStorage.setItem('laju-admin-session', JSON.stringify(next))
+    const store = remember ? localStorage : sessionStorage
+    const other = remember ? sessionStorage : localStorage
+    store.setItem(SESSION_KEY, JSON.stringify(next))
+    other.removeItem(SESSION_KEY)
     setSession(next)
   }
 
   const logout = () => {
-    localStorage.removeItem('laju-admin-session')
+    localStorage.removeItem(SESSION_KEY)
+    sessionStorage.removeItem(SESSION_KEY)
     setSession(null)
   }
 
-  if (!session?.token) return <Login onLogin={login} />
+  if (!session?.token) return <AdminLogin onLogin={login} />
   return <Dashboard user={session.user} token={session.token} onLogout={logout} />
 }

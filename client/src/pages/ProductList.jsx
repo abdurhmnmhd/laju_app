@@ -186,14 +186,14 @@ export default function ProductList() {
           >
             <div className="hero__content">
               <div className="hero__intro">
-                <p className="hero__eyebrow">Koleksi performa</p>
+                <p className="hero__eyebrow">Support Your Perform</p>
                 <h1 className="hero__title">
                   <span>Bergerak</span>
                   <span>tanpa batas.</span>
                 </h1>
               </div>
               <p className="hero__sub">
-                Ringan di badan. Maksimalkan performa.
+                Build For Your Body.
               </p>
             </div>
           </TiltedGridHero>

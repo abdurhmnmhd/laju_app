@@ -54,11 +54,5 @@
 .admin-category-list > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
 .admin-category-list span { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
 .admin-category-list small { color: var(--muted); font-size: 10px; font-weight: 400; }
-.admin-login { display: grid; place-items: center; min-height: 100svh; padding: 20px; background: var(--dark); }
-.admin-login__card { width: 100%; max-width: 420px; padding: 32px; border-radius: var(--radius-xl); background: var(--white); }
-.admin-login__card h1 { margin: 10px 0 8px; font-size: 30px; line-height: 1.08; letter-spacing: -.03em; }
-.admin-login__card .admin-form { margin-top: 28px; }
-.admin-back { display: block; margin-top: 22px; color: var(--muted); font-size: 11px; text-decoration: none; }
-.admin-back:hover { color: var(--ink); }
-@media (min-width: 700px) { .admin-header { padding: 20px 32px; } .admin-main { padding: 44px 32px 80px; } .admin-form__grid { grid-template-columns: repeat(2, 1fr); } .admin-login__card { padding: 42px; } }
+@media (min-width: 700px) { .admin-header { padding: 20px 32px; } .admin-main { padding: 44px 32px 80px; } .admin-form__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .admin-stats div { padding: 14px 12px; } .admin-stats strong { font-size: 20px; } .admin-panel { padding: 16px; } .admin-table-wrap { margin-left: -16px; margin-right: -16px; } .admin-table th, .admin-table td { padding-left: 16px; padding-right: 16px; } .admin-form__grid { grid-template-columns: 1fr; } .admin-welcome { align-items: stretch; flex-direction: column; } }
