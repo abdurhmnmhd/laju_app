@@ -230,6 +230,18 @@ class SqliteDatabase {
       getAdmin() {
         return this.db.prepare('SELECT id, name, email, password FROM admins LIMIT 1').get();
       }
+
+      updateAdminEmail(id, newEmail) {
+        const res = this.db.prepare('UPDATE admins SET email = ? WHERE id = ?').run(newEmail, id);
+        if (res.changes === 0) return null;
+        return this.getAdmin();
+      }
+
+      updateAdminPassword(id, hashedPassword) {
+        const res = this.db.prepare('UPDATE admins SET password = ? WHERE id = ?').run(hashedPassword, id);
+        if (res.changes === 0) return null;
+        return this.getAdmin();
+      }
     
       // --- Category SQL Operations ---
       getCategories() {

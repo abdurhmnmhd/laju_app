@@ -89,7 +89,7 @@ function ProductForm({ product, categories, onSave, onCancel }) {
   )
 }
 
-function Dashboard({ user, token, onLogout }) {
+function Dashboard({ user, token, onLogout, onUserUpdate }) {
   const [tab, setTab] = useState('products')
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
@@ -98,6 +98,16 @@ function Dashboard({ user, token, onLogout }) {
   const [showProductForm, setShowProductForm] = useState(false)
   const [categoryName, setCategoryName] = useState('')
   const [categoryError, setCategoryError] = useState('')
+  const [newEmail, setNewEmail] = useState('')
+  const [confirmEmail, setConfirmEmail] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [savingEmail, setSavingEmail] = useState(false)
+  const [currentPassword2, setCurrentPassword2] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [savingPassword, setSavingPassword] = useState(false)
   const [notice, setNotice] = useState('')
   const [loading, setLoading] = useState(true)
 
@@ -175,6 +185,61 @@ function Dashboard({ user, token, onLogout }) {
     }
   }
 
+  const saveEmail = async (event) => {
+    event.preventDefault()
+    setEmailError('')
+    if (newEmail.trim().toLowerCase() !== confirmEmail.trim().toLowerCase()) {
+      setEmailError('Konfirmasi email tidak sama dengan email baru.')
+      return
+    }
+    setSavingEmail(true)
+    try {
+      const payload = await requestJson('/api/auth/me/email', authOptions(token, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newEmail: newEmail.trim(), currentPassword }),
+      }))
+      if (payload.data && onUserUpdate) onUserUpdate(payload.data)
+      setNewEmail('')
+      setConfirmEmail('')
+      setCurrentPassword('')
+      setNotice('Email admin berhasil diganti. Gunakan email baru untuk login berikutnya.')
+    } catch (err) {
+      setEmailError(err.message)
+    } finally {
+      setSavingEmail(false)
+    }
+  }
+
+  const savePassword = async (event) => {
+    event.preventDefault()
+    setPasswordError('')
+    if (newPassword.length < 8) {
+      setPasswordError('Password baru minimal 8 karakter.')
+      return
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordError('Konfirmasi password tidak sama.')
+      return
+    }
+    setSavingPassword(true)
+    try {
+      await requestJson('/api/auth/me/password', authOptions(token, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword: currentPassword2, newPassword, confirmPassword }),
+      }))
+      setCurrentPassword2('')
+      setNewPassword('')
+      setConfirmPassword('')
+      setNotice('Password admin berhasil diganti. Gunakan password baru untuk login berikutnya.')
+    } catch (err) {
+      setPasswordError(err.message)
+    } finally {
+      setSavingPassword(false)
+    }
+  }
+
   const saveSettings = async (event) => {
     event.preventDefault()
     const payload = await requestJson('/api/store', authOptions(token, {
@@ -210,6 +275,7 @@ function Dashboard({ user, token, onLogout }) {
           <button className={tab === 'products' ? 'is-active' : ''} onClick={() => setTab('products')}>Produk</button>
           <button className={tab === 'categories' ? 'is-active' : ''} onClick={() => setTab('categories')}>Kategori</button>
           <button className={tab === 'settings' ? 'is-active' : ''} onClick={() => setTab('settings')}>Pengaturan toko</button>
+          <button className={tab === 'account' ? 'is-active' : ''} onClick={() => setTab('account')}>Akun admin</button>
         </nav>
         {loading ? <div className="admin-panel"><p className="admin-muted">Memuat data…</p></div> : (
           <>
@@ -248,6 +314,7 @@ function Dashboard({ user, token, onLogout }) {
             )}
             {tab === 'categories' && <section className="admin-panel"><div className="admin-panel__head"><div><p className="admin-eyebrow">Organisasi</p><h2>Kategori produk</h2></div></div><form className="admin-inline-form" onSubmit={addCategory}><input value={categoryName} onChange={(event) => setCategoryName(event.target.value)} placeholder="Nama kategori baru" required /><button className="admin-button admin-button--primary">Tambah</button></form>{categoryError && <p className="admin-alert">{categoryError}</p>}<div className="admin-category-list">{categories.map((category) => <div key={category.id}><span>{category.name}<small>{category.productCount} produk</small></span><button className="is-danger" onClick={() => removeCategory(category)}>Hapus</button></div>)}</div></section>}
             {tab === 'settings' && <form className="admin-panel admin-form" onSubmit={saveSettings}><div className="admin-panel__head"><div><p className="admin-eyebrow">Identitas</p><h2>Pengaturan toko</h2></div><button className="admin-button admin-button--primary">Simpan</button></div><label>Nama toko<input value={settings.storeName || ''} onChange={(event) => setSettings({ ...settings, storeName: event.target.value })} /></label><label>Tagline<input value={settings.tagline || ''} onChange={(event) => setSettings({ ...settings, tagline: event.target.value })} /></label><label>Nomor WhatsApp<input value={settings.phone || ''} onChange={(event) => setSettings({ ...settings, phone: event.target.value })} placeholder="6281234567890" /></label><label>Alamat<textarea rows="3" value={settings.address || ''} onChange={(event) => setSettings({ ...settings, address: event.target.value })} /></label></form>}
+            {tab === 'account' && <><form className="admin-panel admin-form" onSubmit={saveEmail}><div className="admin-panel__head"><div><p className="admin-eyebrow">Keamanan</p><h2>Ganti email login admin</h2></div><button className="admin-button admin-button--primary" disabled={savingEmail}>{savingEmail ? 'Menyimpan…' : 'Ganti email'}</button></div><label>Email saat ini<input value={user?.email || ''} disabled /></label><label>Email baru<input type="email" value={newEmail} onChange={(event) => setNewEmail(event.target.value)} placeholder="email.baru@contoh.com" required /></label><label>Konfirmasi email baru<input type="email" value={confirmEmail} onChange={(event) => setConfirmEmail(event.target.value)} required /></label><label>Password saat ini<input type="password" value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} required /></label><p className="admin-muted">Setelah diganti, login berikutnya harus pakai email baru. Token lama tetap berlaku sampai kedaluwarsa.</p>{emailError && <p className="admin-alert" role="alert">{emailError}</p>}</form><form className="admin-panel admin-form" onSubmit={savePassword} style={{ marginTop: 16 }}><div className="admin-panel__head"><div><p className="admin-eyebrow">Keamanan</p><h2>Ganti password admin</h2></div><button className="admin-button admin-button--primary" disabled={savingPassword}>{savingPassword ? 'Menyimpan…' : 'Ganti password'}</button></div><label>Password saat ini<input type="password" value={currentPassword2} onChange={(event) => setCurrentPassword2(event.target.value)} required /></label><label>Password baru (min. 8 karakter)<input type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} required /></label><label>Konfirmasi password baru<input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required /></label><p className="admin-muted">Password baru langsung berlaku untuk login berikutnya. Sesi lain yang sudah login tetap berlaku sampai token kedaluwarsa.</p>{passwordError && <p className="admin-alert" role="alert">{passwordError}</p>}</form></>}
           </>
         )}
       </main>
@@ -273,6 +340,13 @@ export default function AdminPage() {
     setSession(null)
   }
 
+  const updateUser = (nextUser) => {
+    const next = { ...session, user: nextUser }
+    const store = localStorage.getItem(SESSION_KEY) ? localStorage : sessionStorage
+    store.setItem(SESSION_KEY, JSON.stringify(next))
+    setSession(next)
+  }
+
   if (!session?.token) return <AdminLogin onLogin={login} />
-  return <Dashboard user={session.user} token={session.token} onLogout={logout} />
+  return <Dashboard user={session.user} token={session.token} onLogout={logout} onUserUpdate={updateUser} />
 }
